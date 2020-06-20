@@ -23,7 +23,8 @@ class ViewController: UIViewController {
     var suggestions: [String] = []
     let cellHeight: CGFloat = 44.0
     var persistenceManager: PersistenceManager = PersistenceManager()
-    
+    var selectedIndex: Int = 0
+
     // MARK: Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -185,6 +186,15 @@ class ViewController: UIViewController {
     }
 }
 
+extension ViewController { // NAVIGATION
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let detailImageCollectionViewController: DetailImageCollectionViewController = segue.destination as? DetailImageCollectionViewController {
+            detailImageCollectionViewController.imagesArray = imagesResults
+            detailImageCollectionViewController.selectedIndex = selectedIndex
+        }
+    }
+}
+
 extension ViewController: UISearchBarDelegate {
     // MARK: UISearchBarDelegate Methods
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -259,6 +269,11 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         if (imagesResults.count > 0 && indexPath.row >= imagesResults.count - 10) {
             fetchResultsForNextPage()
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedIndex = indexPath.row
+        self.performSegue(withIdentifier: "someIdentifier", sender: self)
     }
 }
 

@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		D435FB73249E3609006054FF /* SuggestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D435FB72249E3609006054FF /* SuggestionTableViewCell.swift */; };
 		D435FB75249E3D7F006054FF /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D435FB74249E3D7F006054FF /* PersistenceManager.swift */; };
+		D435FB7B249E4793006054FF /* DetailImageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D435FB7A249E4793006054FF /* DetailImageCollectionViewController.swift */; };
+		D435FB80249E515C006054FF /* DetailImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D435FB7E249E515C006054FF /* DetailImageCollectionViewCell.swift */; };
+		D435FB81249E515C006054FF /* DetailImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D435FB7F249E515C006054FF /* DetailImageCollectionViewCell.xib */; };
 		D464EB592340A26400634C67 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D464EB582340A26400634C67 /* AppDelegate.swift */; };
 		D464EB5B2340A26400634C67 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D464EB5A2340A26400634C67 /* SceneDelegate.swift */; };
 		D464EB5D2340A26400634C67 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D464EB5C2340A26400634C67 /* ViewController.swift */; };
@@ -41,6 +44,9 @@
 /* Begin PBXFileReference section */
 		D435FB72249E3609006054FF /* SuggestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionTableViewCell.swift; sourceTree = "<group>"; };
 		D435FB74249E3D7F006054FF /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
+		D435FB7A249E4793006054FF /* DetailImageCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageCollectionViewController.swift; sourceTree = "<group>"; };
+		D435FB7E249E515C006054FF /* DetailImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		D435FB7F249E515C006054FF /* DetailImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		D464EB552340A26400634C67 /* Assignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assignment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D464EB582340A26400634C67 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D464EB5A2340A26400634C67 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +112,7 @@
 				D464EB582340A26400634C67 /* AppDelegate.swift */,
 				D464EB5A2340A26400634C67 /* SceneDelegate.swift */,
 				D464EB5C2340A26400634C67 /* ViewController.swift */,
+				D435FB7A249E4793006054FF /* DetailImageCollectionViewController.swift */,
 				D464EB712340A2C900634C67 /* Custom Cells */,
 				D464EB6E2340A29E00634C67 /* Network */,
 				D464EB762340A33800634C67 /* Managers */,
@@ -133,6 +140,8 @@
 				D464EB722340A2DD00634C67 /* ImageCollectionViewCell.swift */,
 				D464EB732340A2DD00634C67 /* ImageCollectionViewCell.xib */,
 				D435FB72249E3609006054FF /* SuggestionTableViewCell.swift */,
+				D435FB7E249E515C006054FF /* DetailImageCollectionViewCell.swift */,
+				D435FB7F249E515C006054FF /* DetailImageCollectionViewCell.xib */,
 			);
 			path = "Custom Cells";
 			sourceTree = "<group>";
@@ -249,6 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D464EB652340A26600634C67 /* LaunchScreen.storyboard in Resources */,
+				D435FB81249E515C006054FF /* DetailImageCollectionViewCell.xib in Resources */,
 				D464EB622340A26600634C67 /* Assets.xcassets in Resources */,
 				D464EB752340A2DD00634C67 /* ImageCollectionViewCell.xib in Resources */,
 				D464EB602340A26400634C67 /* Main.storyboard in Resources */,
@@ -272,6 +282,8 @@
 				D464EB862340A37F00634C67 /* ImageCollectionViewCellModel.swift in Sources */,
 				D435FB75249E3D7F006054FF /* PersistenceManager.swift in Sources */,
 				D464EB702340A2AD00634C67 /* URLObject.swift in Sources */,
+				D435FB80249E515C006054FF /* DetailImageCollectionViewCell.swift in Sources */,
+				D435FB7B249E4793006054FF /* DetailImageCollectionViewController.swift in Sources */,
 				D464EB842340A37F00634C67 /* ImageModel.swift in Sources */,
 				D464EB872340A37F00634C67 /* SearchResultModel.swift in Sources */,
 				D464EB7C2340A34F00634C67 /* DataManager.swift in Sources */,
