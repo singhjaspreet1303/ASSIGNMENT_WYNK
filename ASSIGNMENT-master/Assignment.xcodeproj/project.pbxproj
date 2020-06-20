@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D435FB73249E3609006054FF /* SuggestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D435FB72249E3609006054FF /* SuggestionTableViewCell.swift */; };
+		D435FB75249E3D7F006054FF /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D435FB74249E3D7F006054FF /* PersistenceManager.swift */; };
 		D464EB592340A26400634C67 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D464EB582340A26400634C67 /* AppDelegate.swift */; };
 		D464EB5B2340A26400634C67 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D464EB5A2340A26400634C67 /* SceneDelegate.swift */; };
 		D464EB5D2340A26400634C67 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D464EB5C2340A26400634C67 /* ViewController.swift */; };
@@ -37,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D435FB72249E3609006054FF /* SuggestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionTableViewCell.swift; sourceTree = "<group>"; };
+		D435FB74249E3D7F006054FF /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		D464EB552340A26400634C67 /* Assignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assignment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D464EB582340A26400634C67 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D464EB5A2340A26400634C67 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -128,6 +132,7 @@
 			children = (
 				D464EB722340A2DD00634C67 /* ImageCollectionViewCell.swift */,
 				D464EB732340A2DD00634C67 /* ImageCollectionViewCell.xib */,
+				D435FB72249E3609006054FF /* SuggestionTableViewCell.swift */,
 			);
 			path = "Custom Cells";
 			sourceTree = "<group>";
@@ -138,6 +143,7 @@
 				D464EB792340A34F00634C67 /* DataManager.swift */,
 				D464EB782340A34F00634C67 /* ImageDownloader.swift */,
 				D464EB772340A34F00634C67 /* SearchDataManager.swift */,
+				D435FB74249E3D7F006054FF /* PersistenceManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -264,6 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D464EB862340A37F00634C67 /* ImageCollectionViewCellModel.swift in Sources */,
+				D435FB75249E3D7F006054FF /* PersistenceManager.swift in Sources */,
 				D464EB702340A2AD00634C67 /* URLObject.swift in Sources */,
 				D464EB842340A37F00634C67 /* ImageModel.swift in Sources */,
 				D464EB872340A37F00634C67 /* SearchResultModel.swift in Sources */,
@@ -275,6 +282,7 @@
 				D464EB592340A26400634C67 /* AppDelegate.swift in Sources */,
 				D464EB5B2340A26400634C67 /* SceneDelegate.swift in Sources */,
 				D464EB7A2340A34F00634C67 /* SearchDataManager.swift in Sources */,
+				D435FB73249E3609006054FF /* SuggestionTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

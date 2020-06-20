@@ -8,17 +8,22 @@
 
 import UIKit
 
-class ViewController: UIViewController, UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class ViewController: UIViewController {
 
     // MARK: Outlets
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var imagesCollectionView: UICollectionView!
+    @IBOutlet weak var suggestionTableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-
+    @IBOutlet weak var suggestionsTableViewHeightConstraint: NSLayoutConstraint!
+    
     // MARK: Properties
     var currentSearchQuery = ""
     var imagesResults: [ImageCollectionViewCellModel] = []
-
+    var suggestions: [String] = []
+    let cellHeight: CGFloat = 44.0
+    var persistenceManager: PersistenceManager = PersistenceManager()
+    
     // MARK: Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,8 +38,34 @@ class ViewController: UIViewController, UISearchBarDelegate, UICollectionViewDel
         self.imagesCollectionView.dataSource = self
         self.imagesCollectionView.register(UINib(nibName: "ImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ImageCollectionViewCell")
         
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(hideKeyboard))
-        self.view.addGestureRecognizer(tapGestureRecognizer)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        
+//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(hideAll))
+//        self.view.addGestureRecognizer(tapGestureRecognizer)
+        
+        self.suggestionTableView.register(SuggestionTableViewCell.self, forCellReuseIdentifier: "SuggestionTableViewCell")
+        self.suggestionTableView.isScrollEnabled = false
+        self.updateSuggestionTableViewFrame(isHidden: true)
+        
+        if let lastSearchedResults: [String] = self.persistenceManager.getData() {
+            suggestions = lastSearchedResults
+        }
+    }
+    
+    fileprivate func updateSuggestionTableViewFrame(isHidden hidden: Bool) {
+        if (hidden) {
+            self.suggestionsTableViewHeightConstraint.constant = 0
+        } else {
+            self.suggestionsTableViewHeightConstraint.constant = CGFloat(suggestions.count) * cellHeight
+        }
+        self.view.setNeedsLayout()
+        self.view.layoutIfNeeded()
+        self.suggestionTableView.reloadData()
     }
     
     fileprivate func showAlertForEmptyQuery() {
@@ -66,7 +97,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UICollectionViewDel
         self.activityIndicator.startAnimating()
         self.view.isUserInteractionEnabled = false
         
-        SearchDataManager.sharedManager.getDataForQuery(query: query) {[weak self] (imagesArray, error) in
+        SearchDataManager.sharedManager.getDataForQuery(query: query) {[weak self, query] (imagesArray, error) in
             DispatchQueue.main.async {
                 self?.view.isUserInteractionEnabled = true
                 self?.imagesCollectionView.isHidden = false;
@@ -82,11 +113,23 @@ class ViewController: UIViewController, UISearchBarDelegate, UICollectionViewDel
                         }
                     } else {
                         self?.imagesResults.append(contentsOf: imagesArray ?? [])
+                        self?.appendLastSuggestion(query: query)
                         self?.imagesCollectionView.reloadData()
                     }
                 }
             }
         }
+    }
+    
+    fileprivate func appendLastSuggestion(query: String) {
+        if let index = self.suggestions.firstIndex(of: query) {
+            self.suggestions.remove(at: index)
+        }
+        self.suggestions.insert(query, at: 0)
+        if (self.suggestions.count > 10) {
+            self.suggestions.removeLast()
+        }
+        persistenceManager.persist(results: suggestions)
     }
     
     fileprivate func fetchResultsForNextPage() {
@@ -110,14 +153,42 @@ class ViewController: UIViewController, UISearchBarDelegate, UICollectionViewDel
         return CGSize(width: size, height: size)
     }
     
-    // MARK: @objc methods
-    @objc func hideKeyboard() {
+    func hideSuggestionsTableView() {
+        self.updateSuggestionTableViewFrame(isHidden: true)
+    }
+    
+    func hideKeyboard() {
         self.searchBar.resignFirstResponder()
     }
     
+    // MARK: @objc methods
+    @objc func hideAll() {
+        hideSuggestionsTableView()
+        hideKeyboard()
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            let allowedHeight = self.view.frame.size.height - (self.suggestionTableView.frame.origin.y + keyboardHeight + 10)
+            if (self.suggestionsTableViewHeightConstraint.constant > 0
+                && self.suggestionsTableViewHeightConstraint.constant > allowedHeight) {
+                self.suggestionsTableViewHeightConstraint.constant = allowedHeight
+                self.view.setNeedsLayout()
+                self.view.layoutIfNeeded()
+                self.suggestionTableView.isScrollEnabled = true
+            } else {
+                self.suggestionTableView.isScrollEnabled = false
+            }
+        }
+    }
+}
+
+extension ViewController: UISearchBarDelegate {
     // MARK: UISearchBarDelegate Methods
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        hideKeyboard()
+        hideAll()
         if let query = searchBar.text {
             if query.isEmpty {
                 showAlertForEmptyQuery()
@@ -133,6 +204,12 @@ class ViewController: UIViewController, UISearchBarDelegate, UICollectionViewDel
         }
     }
     
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.updateSuggestionTableViewFrame(isHidden: false)
+    }
+}
+
+extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     // MARK: UICollectionViewDataSource Methods
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -170,7 +247,11 @@ class ViewController: UIViewController, UISearchBarDelegate, UICollectionViewDel
     
     // MARK: UIScrollViewDelegate Methods
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-        hideKeyboard()
+        if (scrollView == self.suggestionTableView) {
+//            hideKeyboard()
+        } else {
+            hideAll()
+        }
     }
     
     // MARK: UICollectionViewDelegate Methods
@@ -178,6 +259,25 @@ class ViewController: UIViewController, UISearchBarDelegate, UICollectionViewDel
         if (imagesResults.count > 0 && indexPath.row >= imagesResults.count - 10) {
             fetchResultsForNextPage()
         }
+    }
+}
+
+extension ViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return suggestions.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell: SuggestionTableViewCell = tableView.dequeueReusableCell(withIdentifier: "SuggestionTableViewCell") as? SuggestionTableViewCell else {
+            return UITableViewCell()
+        }
+        cell.update(withTitle: suggestions[indexPath.row])
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        hideAll()
+        fetchAndShowSearchResults(forQuery: suggestions[indexPath.row])
     }
 }
 

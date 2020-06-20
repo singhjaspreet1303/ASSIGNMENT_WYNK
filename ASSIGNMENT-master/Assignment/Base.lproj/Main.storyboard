@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NLc-cf-5I5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NLc-cf-5I5">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -34,16 +34,41 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WCY-XP-Yel">
+                                <rect key="frame" x="0.0" y="100" width="414" height="0.0"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="Hse-8n-qCD"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SuggestionTableViewCell" id="tqU-iM-EcT">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tqU-iM-EcT" id="MwZ-P3-Fbp">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="NLc-cf-5I5" id="quh-XL-gbS"/>
+                                    <outlet property="delegate" destination="NLc-cf-5I5" id="vBp-ig-z51"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="WCY-XP-Yel" firstAttribute="top" secondItem="pig-rF-c3B" secondAttribute="bottom" id="25b-vd-k5f"/>
                             <constraint firstItem="3Nx-rL-44f" firstAttribute="top" secondItem="pig-rF-c3B" secondAttribute="bottom" id="7nS-or-GL9"/>
                             <constraint firstItem="pig-rF-c3B" firstAttribute="leading" secondItem="Cyn-sx-xUs" secondAttribute="leading" id="I4X-jq-CNr"/>
                             <constraint firstItem="yhs-w5-aUm" firstAttribute="trailing" secondItem="3Nx-rL-44f" secondAttribute="trailing" id="I8n-5z-jvf"/>
+                            <constraint firstItem="yhs-w5-aUm" firstAttribute="trailing" secondItem="WCY-XP-Yel" secondAttribute="trailing" id="Qud-ah-de3"/>
                             <constraint firstItem="fMa-OQ-Nxy" firstAttribute="centerY" secondItem="Cyn-sx-xUs" secondAttribute="centerY" id="TgT-9t-IXE"/>
                             <constraint firstItem="yhs-w5-aUm" firstAttribute="bottom" secondItem="3Nx-rL-44f" secondAttribute="bottom" id="Z50-5B-Cbt"/>
                             <constraint firstAttribute="trailing" secondItem="pig-rF-c3B" secondAttribute="trailing" id="aPO-Y5-MVJ"/>
                             <constraint firstItem="pig-rF-c3B" firstAttribute="top" secondItem="yhs-w5-aUm" secondAttribute="top" id="fOU-XZ-5e9"/>
+                            <constraint firstItem="WCY-XP-Yel" firstAttribute="leading" secondItem="yhs-w5-aUm" secondAttribute="leading" id="u57-sw-wuQ"/>
                             <constraint firstItem="fMa-OQ-Nxy" firstAttribute="centerX" secondItem="Cyn-sx-xUs" secondAttribute="centerX" id="y4t-LU-lLw"/>
                             <constraint firstItem="3Nx-rL-44f" firstAttribute="leading" secondItem="yhs-w5-aUm" secondAttribute="leading" id="yg4-h4-aSq"/>
                         </constraints>
@@ -53,11 +78,13 @@
                         <outlet property="activityIndicator" destination="fMa-OQ-Nxy" id="zT9-v3-S9D"/>
                         <outlet property="imagesCollectionView" destination="3Nx-rL-44f" id="3um-FE-i7D"/>
                         <outlet property="searchBar" destination="pig-rF-c3B" id="PBm-wD-tjj"/>
+                        <outlet property="suggestionTableView" destination="WCY-XP-Yel" id="pOl-Bu-DGZ"/>
+                        <outlet property="suggestionsTableViewHeightConstraint" destination="Hse-8n-qCD" id="Nr4-mc-mL6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rnz-Jo-dyv" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="878" y="119"/>
+            <point key="canvasLocation" x="876.81159420289862" y="118.52678571428571"/>
         </scene>
     </scenes>
 </document>
