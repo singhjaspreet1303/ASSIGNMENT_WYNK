@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NLc-cf-5I5">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="DCW-z0-8QC">
+            <objects>
+                <viewController id="NLc-cf-5I5" customClass="ViewController" customModule="Assignment" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Cyn-sx-xUs">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="pig-rF-c3B">
+                                <rect key="frame" x="0.0" y="44" width="414" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="fMa-OQ-Nxy">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                                <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="always" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="3Nx-rL-44f">
+                                <rect key="frame" x="0.0" y="100" width="414" height="762"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="aHs-7Q-7Cx">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="3Nx-rL-44f" firstAttribute="top" secondItem="pig-rF-c3B" secondAttribute="bottom" id="7nS-or-GL9"/>
+                            <constraint firstItem="pig-rF-c3B" firstAttribute="leading" secondItem="Cyn-sx-xUs" secondAttribute="leading" id="I4X-jq-CNr"/>
+                            <constraint firstItem="yhs-w5-aUm" firstAttribute="trailing" secondItem="3Nx-rL-44f" secondAttribute="trailing" id="I8n-5z-jvf"/>
+                            <constraint firstItem="fMa-OQ-Nxy" firstAttribute="centerY" secondItem="Cyn-sx-xUs" secondAttribute="centerY" id="TgT-9t-IXE"/>
+                            <constraint firstItem="yhs-w5-aUm" firstAttribute="bottom" secondItem="3Nx-rL-44f" secondAttribute="bottom" id="Z50-5B-Cbt"/>
+                            <constraint firstAttribute="trailing" secondItem="pig-rF-c3B" secondAttribute="trailing" id="aPO-Y5-MVJ"/>
+                            <constraint firstItem="pig-rF-c3B" firstAttribute="top" secondItem="yhs-w5-aUm" secondAttribute="top" id="fOU-XZ-5e9"/>
+                            <constraint firstItem="fMa-OQ-Nxy" firstAttribute="centerX" secondItem="Cyn-sx-xUs" secondAttribute="centerX" id="y4t-LU-lLw"/>
+                            <constraint firstItem="3Nx-rL-44f" firstAttribute="leading" secondItem="yhs-w5-aUm" secondAttribute="leading" id="yg4-h4-aSq"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="yhs-w5-aUm"/>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="fMa-OQ-Nxy" id="zT9-v3-S9D"/>
+                        <outlet property="imagesCollectionView" destination="3Nx-rL-44f" id="3um-FE-i7D"/>
+                        <outlet property="searchBar" destination="pig-rF-c3B" id="PBm-wD-tjj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rnz-Jo-dyv" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="878" y="119"/>
+        </scene>
+    </scenes>
+</document>
